@@ -58,7 +58,7 @@ public class CharacterGenerator : MonoBehaviour {
 		//Race
 		//
 		//Now that we know the current era, we can pick a race from the pool of the ones available.
-		//
+		
 	}
 
 //===========================================================================
