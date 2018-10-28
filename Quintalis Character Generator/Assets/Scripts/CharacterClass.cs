@@ -59,6 +59,7 @@ public static class CharacterClass {
 		AstralGods
 	}
 	public enum AgeGroup{
+		Random,
 		Adolescent,
 		YoungAdult,
 		MiddleAge,

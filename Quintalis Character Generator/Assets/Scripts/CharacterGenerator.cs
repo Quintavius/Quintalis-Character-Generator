@@ -40,39 +40,63 @@ public class CharacterGenerator : MonoBehaviour {
 		//Decide on era
 		//
 		//- If era is set to random, pick era at random. Skip this step if a current year is specified.
-		if (currentYear != 0){
+		if (currentYear == 0){
 			if (era == CharacterClass.Era.Random){
-
+				//Pick a random era and pass it to the character
+				var values = System.Enum.GetValues(typeof(CharacterClass.Era));
+				character.era = (CharacterClass.Era)Random.Range(1,values.Length);
 			}else{
-				//Era is specified but we need to find a current year that fits.
-
+				//Just pass the selected era to the Character
+				character.era = era;
 			}
+			//Era is now set, now generate a current year.
+			currentYear = GetYearFromEra(character.era);
+			
 		}else{
-			//Year is specified, match it with an era.
-
+			//Year is specified, match it with an era and pass it to the character
+			era = GetEraFromYear(currentYear);
+			character.era = era;
 		}
+
 
 		//++++++++++++++++++++
 		//STEP 2
 		//
 		//Race
 		//
-		//Now that we know the current era, we can pick a race from the pool of the ones available.
-		
+		//Now that we know the current era, we can pick a race from the pool of the ones available, if race is set to random
+		if (race == CharacterClass.Race.Random){
+			//character.race = 
+		}else{
+			//Nevermind, it's set. Just pass it on.
+			character.race = race;
+		}
 	}
 
 //===========================================================================
 	//Utility functions
-/*
+
 	CharacterClass.Era GetEraFromYear(int yearToProcess){
+		//Iterate through era dictionary, compare current year to era and return if a match is found.
 		CharacterClass.Era eraToReturn;
+		foreach(KeyValuePair<CharacterClass.Era,CoreValues.EraClass> eraClass in eraDefinition){
+			if (currentYear >= eraClass.Value.eraStartYear && currentYear < eraClass.Value.eraEndYear){
+				//Found a matching era
+				eraToReturn = eraClass.Value.eraIndex;
+				return eraToReturn;
+			}
+		}
+		//Year specified doesn't match, return a default.
+		eraToReturn = CharacterClass.Era.SynsteelAge;
 		return eraToReturn;
 	}
 
 	int GetYearFromEra(CharacterClass.Era eraToProcess){
+		//Take specified era, compare with dictionary to get era range, generate random number between those years.
 		int yearToReturn;
+		yearToReturn = Random.Range(eraDefinition[(CharacterClass.Era)eraToProcess].eraStartYear,eraDefinition[(CharacterClass.Era)eraToProcess].eraEndYear);
 		return yearToReturn;
-	}*/
+	}
 
 
 //===========================================================================
@@ -136,7 +160,7 @@ public class CharacterGenerator : MonoBehaviour {
 		CoreValues.EraClass AstralEra = new CoreValues.EraClass();
 		AstralEra.eraIndex = CharacterClass.Era.AstralEra;
 		AstralEra.eraStartYear = 1;
-		AstralEra.eraEndYear = 2289;
+		AstralEra.eraEndYear = 2293;
 		AstralEra.availableRacesInEra = preMagusdawnRaceList;
 		AstralEra.availableGiftsInEra = mediumGiftList;
 
@@ -150,7 +174,7 @@ public class CharacterGenerator : MonoBehaviour {
 		CoreValues.EraClass Magusdawn = new CoreValues.EraClass();
 		Magusdawn.eraIndex = CharacterClass.Era.Magusdawn;
 		Magusdawn.eraStartYear = 2293;
-		Magusdawn.eraEndYear = 2311;
+		Magusdawn.eraEndYear = 2312;
 		Magusdawn.availableRacesInEra = preMagusdawnRaceList;
 		Magusdawn.availableGiftsInEra = mediumGiftList;
 
@@ -164,7 +188,7 @@ public class CharacterGenerator : MonoBehaviour {
 		CoreValues.EraClass FirstAgeOfEsper = new CoreValues.EraClass();
 		FirstAgeOfEsper.eraIndex = CharacterClass.Era.FirstAgeOfEsper;
 		FirstAgeOfEsper.eraStartYear = 2312;
-		FirstAgeOfEsper.eraEndYear = 2312+561;
+		FirstAgeOfEsper.eraEndYear = 2312+562;
 		FirstAgeOfEsper.availableRacesInEra = postMagusdawnRaceList;
 		FirstAgeOfEsper.availableGiftsInEra = esperGiftList;
 
@@ -178,7 +202,7 @@ public class CharacterGenerator : MonoBehaviour {
 		CoreValues.EraClass SecondAgeOfEsper = new CoreValues.EraClass();
 		SecondAgeOfEsper.eraIndex = CharacterClass.Era.SecondAgeOfEsper;
 		SecondAgeOfEsper.eraStartYear = 2312+562;
-		SecondAgeOfEsper.eraEndYear = 2312+699;
+		SecondAgeOfEsper.eraEndYear = 2312+700;
 		SecondAgeOfEsper.availableRacesInEra = postMagusdawnRaceList;
 		SecondAgeOfEsper.availableGiftsInEra = esperGiftList;
 
@@ -192,7 +216,7 @@ public class CharacterGenerator : MonoBehaviour {
 		CoreValues.EraClass ThirdAgeOfEsper = new CoreValues.EraClass();
 		ThirdAgeOfEsper.eraIndex = CharacterClass.Era.ThirdAgeOfEsper;
 		ThirdAgeOfEsper.eraStartYear = 2312+700;
-		ThirdAgeOfEsper.eraEndYear = 2312+972;
+		ThirdAgeOfEsper.eraEndYear = 2312+973;
 		ThirdAgeOfEsper.availableRacesInEra = postMagusdawnRaceList;
 		ThirdAgeOfEsper.availableGiftsInEra = esperGiftList;
 
@@ -206,7 +230,7 @@ public class CharacterGenerator : MonoBehaviour {
 		CoreValues.EraClass SynsteelAge = new CoreValues.EraClass();
 		SynsteelAge.eraIndex = CharacterClass.Era.SynsteelAge;
 		SynsteelAge.eraStartYear = 2312+973;
-		SynsteelAge.eraEndYear = 2312+1216;
+		SynsteelAge.eraEndYear = 2312+1217;
 		SynsteelAge.availableRacesInEra = postMagusdawnRaceList;
 		SynsteelAge.availableGiftsInEra = allGiftsList;
 
@@ -220,7 +244,7 @@ public class CharacterGenerator : MonoBehaviour {
 		CoreValues.EraClass AgeOfUpheaval = new CoreValues.EraClass();
 		AgeOfUpheaval.eraIndex = CharacterClass.Era.AgeOfUpheaval;
 		AgeOfUpheaval.eraStartYear = 2312+1217;
-		AgeOfUpheaval.eraEndYear = 2312+2311;
+		AgeOfUpheaval.eraEndYear = 2312+2312;
 		AgeOfUpheaval.availableRacesInEra = postMagusdawnRaceList;
 		AgeOfUpheaval.availableGiftsInEra = allGiftsList;
 
