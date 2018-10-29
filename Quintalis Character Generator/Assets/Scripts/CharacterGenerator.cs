@@ -83,7 +83,7 @@ public class CharacterGenerator : MonoBehaviour {
 		//Stats
 		//
 		//Knowing the race, we can now use the stats recipes to stat up this character according to selected power level
-
+		
 
 
 		//++++++++++++++++++++
@@ -118,7 +118,7 @@ public class CharacterGenerator : MonoBehaviour {
 		//
 		//Age
 		//
-		//We know current year and race. Let's chuck up a random age based on the maximum range of the race and subtract it from current year to get YoB, age group and age.
+		//We know current year and race. Let's chuck up a random age class, generate an age within that and subtract it from current year to get YoB.
 	}
 
 //===========================================================================
@@ -343,6 +343,225 @@ public class CharacterGenerator : MonoBehaviour {
 
 		//Commit to class
 		raceDefinition.Add(CharacterClass.Race.Askadur, Askadur);
+		
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Draugur
+	//++++++++++++++++++++++++++++++++++++++++++
 
+		CoreValues.RaceClass Draugur = new CoreValues.RaceClass();
+		Draugur.raceIndex = CharacterClass.Race.Draugur;
+		//Dice
+		Draugur.dieSize_Brains = 4;
+		Draugur.dieSize_Brawn = 2;
+		Draugur.dieSize_Skin = 3;
+		Draugur.dieSize_Tongue = 1;
+		//Ages
+		Draugur.ageRange_Adolescent = new Vector2(100,250);
+		Draugur.ageRange_YoungAdult = new Vector2(250,430);
+		Draugur.ageRange_MiddleAge = new Vector2(430,750);
+		Draugur.ageRange_Old = new Vector2(750,1200);
+		Draugur.ageRange_Ancient = new Vector2(1200,11200);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Draugur, Draugur);
+				
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Faeryn
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass Faeryn = new CoreValues.RaceClass();
+		Faeryn.raceIndex = CharacterClass.Race.Faeryn;
+		//Dice
+		Faeryn.dieSize_Brains = 3;
+		Faeryn.dieSize_Brawn = 2;
+		Faeryn.dieSize_Skin = 2;
+		Faeryn.dieSize_Tongue = 4;
+		//Ages
+		Faeryn.ageRange_Adolescent = new Vector2(8,14);
+		Faeryn.ageRange_YoungAdult = new Vector2(14,22);
+		Faeryn.ageRange_MiddleAge = new Vector2(22,31);
+		Faeryn.ageRange_Old = new Vector2(31,45);
+		Faeryn.ageRange_Ancient = new Vector2(45,77);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Faeryn, Faeryn);
+
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Kanina
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass Kanina = new CoreValues.Kanina();
+		Kanina.raceIndex = CharacterClass.Race.Kanina;
+		//Dice
+		Kanina.dieSize_Brains = 1;
+		Kanina.dieSize_Brawn = 3;
+		Kanina.dieSize_Skin = 2;
+		Kanina.dieSize_Tongue = 6;
+		//Ages
+		Kanina.ageRange_Adolescent = new Vector2(15,21);
+		Kanina.ageRange_YoungAdult = new Vector2(21,55);
+		Kanina.ageRange_MiddleAge = new Vector2(55,80);
+		Kanina.ageRange_Old = new Vector2(80,105);
+		Kanina.ageRange_Ancient = new Vector2(105,185);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Kanina, Kanina);
+
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Madur
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass Madur = new CoreValues.Madur();
+		Madur.raceIndex = CharacterClass.Race.Madur;
+		//Dice
+		Madur.dieSize_Brains = 4;
+		Madur.dieSize_Brawn = 2;
+		Madur.dieSize_Skin = 2;
+		Madur.dieSize_Tongue = 4;
+		//Ages
+		Madur.ageRange_Adolescent = new Vector2(12,18);
+		Madur.ageRange_YoungAdult = new Vector2(18,30);
+		Madur.ageRange_MiddleAge = new Vector2(30,50);
+		Madur.ageRange_Old = new Vector2(50,70);
+		Madur.ageRange_Ancient = new Vector2(70,110);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Madur, Madur);
+		
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Nyrn
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass Nyrn = new CoreValues.Nyrn();
+		Nyrn.raceIndex = CharacterClass.Race.Nyrn;
+		//Dice
+		Nyrn.dieSize_Brains = 6;
+		Nyrn.dieSize_Brawn = 2;
+		Nyrn.dieSize_Skin = 2;
+		Nyrn.dieSize_Tongue = 2;
+		//Ages
+		Nyrn.ageRange_Adolescent = new Vector2(30,45);
+		Nyrn.ageRange_YoungAdult = new Vector2(45,75);
+		Nyrn.ageRange_MiddleAge = new Vector2(75,100);
+		Nyrn.ageRange_Old = new Vector2(101,130);
+		Nyrn.ageRange_Ancient = new Vector2(130,230);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Nyrn, Nyrn);
+				
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Skjomadur
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass Skjomadur = new CoreValues.Skjomadur();
+		Skjomadur.raceIndex = CharacterClass.Race.Skjomadur;
+		//Dice
+		Skjomadur.dieSize_Brains = 3;
+		Skjomadur.dieSize_Brawn = 3;
+		Skjomadur.dieSize_Skin = 2;
+		Skjomadur.dieSize_Tongue = 4;
+		//Ages
+		Skjomadur.ageRange_Adolescent = new Vector2(10,16);
+		Skjomadur.ageRange_YoungAdult = new Vector2(16,25);
+		Skjomadur.ageRange_MiddleAge = new Vector2(25,40);
+		Skjomadur.ageRange_Old = new Vector2(40,65);
+		Skjomadur.ageRange_Ancient = new Vector2(65,89);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Skjomadur, Skjomadur);
+						
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Troll
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass Troll = new CoreValues.Troll();
+		Troll.raceIndex = CharacterClass.Race.Troll;
+		//Dice
+		Troll.dieSize_Brains = 1;
+		Troll.dieSize_Brawn = 4;
+		Troll.dieSize_Skin = 6;
+		Troll.dieSize_Tongue = 1;
+		//Ages
+		Troll.ageRange_Adolescent = new Vector2(20,30);
+		Troll.ageRange_YoungAdult = new Vector2(30,45);
+		Troll.ageRange_MiddleAge = new Vector2(45,60);
+		Troll.ageRange_Old = new Vector2(60,90);
+		Troll.ageRange_Ancient = new Vector2(90,170);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Troll, Troll);
+								
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Vidur
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass Vidur = new CoreValues.Vidur();
+		Vidur.raceIndex = CharacterClass.Race.Vidur;
+		//Dice
+		Vidur.dieSize_Brains = 4;
+		Vidur.dieSize_Brawn = 1;
+		Vidur.dieSize_Skin = 4;
+		Vidur.dieSize_Tongue = 2;
+		//Ages
+		Vidur.ageRange_Adolescent = new Vector2(5,20);
+		Vidur.ageRange_YoungAdult = new Vector2(20,50);
+		Vidur.ageRange_MiddleAge = new Vector2(50,85);
+		Vidur.ageRange_Old = new Vector2(85,120);
+		Vidur.ageRange_Ancient = new Vector2(120,1120);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Vidur, Vidur);
+										
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Lifindur
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass Lifindur = new CoreValues.Lifindur();
+		Vidur.raceIndex = CharacterClass.Race.Lifindur;
+		//Dice
+		Lifindur.dieSize_Brains = 6;
+		Lifindur.dieSize_Brawn = 1;
+		Lifindur.dieSize_Skin = 2;
+		Lifindur.dieSize_Tongue = 4;
+		//Ages
+		Lifindur.ageRange_Adolescent = new Vector2(1,2);
+		Lifindur.ageRange_YoungAdult = new Vector2(2,28);
+		Lifindur.ageRange_MiddleAge = new Vector2(28,60);
+		Lifindur.ageRange_Old = new Vector2(60,120);
+		Lifindur.ageRange_Ancient = new Vector2(120,190);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Lifindur, Lifindur);
+												
+	//++++++++++++++++++++++++++++++++++++++++++
+	//UrminnYoung
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass UrminnYoung = new CoreValues.UrminnYoung();
+		UrminnYoung.raceIndex = CharacterClass.Race.UrminnYoung;
+		//Dice
+		UrminnYoung.dieSize_Brains = 6;
+		Lifindur.dieSize_Brawn = 1;
+		Lifindur.dieSize_Skin = 2;
+		Lifindur.dieSize_Tongue = 4;
+		//Ages
+		Lifindur.ageRange_Adolescent = new Vector2(1,2);
+		Lifindur.ageRange_YoungAdult = new Vector2(2,28);
+		Lifindur.ageRange_MiddleAge = new Vector2(28,60);
+		Lifindur.ageRange_Old = new Vector2(60,120);
+		Lifindur.ageRange_Ancient = new Vector2(120,190);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Lifindur, Lifindur);
 	}
 }
