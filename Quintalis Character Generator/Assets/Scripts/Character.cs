@@ -17,7 +17,7 @@ public class Character : MonoBehaviour {
 	public int currentYear;
 	public CharacterClass.AgeGroup ageGroup;
 	public CharacterClass.Era era;
-	public CharacterClass.Race race;
+	public CharacterClass.Species species;
 	public CharacterClass.Gift gift;
 	public CharacterClass.Esper esper;
 	public CharacterClass.Pantheon pantheon;

@@ -5,22 +5,24 @@ using UnityEngine;
 public class CharacterGenerator : MonoBehaviour {
 	//Reference slots
 	private Character character;
+	private NameManager nameManager;
 	
 	//Dictionaries containing all expanded information based on enum lookups. 
 	//Works by doing Dictionary<[Enum Reference],[Class container that has all the deetz]>
 	public Dictionary<CharacterClass.Era,CoreValues.EraClass> eraDefinition;
-		//Contains era start & end, available races and gifts per era.
-	public Dictionary<CharacterClass.Race,CoreValues.RaceClass> raceDefinition;
+		//Contains era start & end, available speciess and gifts per era.
+	public Dictionary<CharacterClass.Species,CoreValues.SpeciesClass> speciesDefinition;
 		//Contains age ranges and stat dice.
 
 
 //===========================================================================
-	//Public generation settings, changed by user input
+	//Public generation settings, changed by user input. These are overrides, basically.
 
+	public string characterName;
 	public int currentYear;
 	public CharacterClass.PowerLevel powerLevel;
 	public CharacterClass.Era era;
-	public CharacterClass.Race race;
+	public CharacterClass.Species species;
 	public CharacterClass.Gift gift;
 
 //===========================================================================
@@ -28,6 +30,7 @@ public class CharacterGenerator : MonoBehaviour {
 
 	private void Start(){
 		character = GetComponent<Character>();
+		nameManager = GetComponent<NameManager>();
 		PopulateDictionaries();
 	}
 
@@ -64,16 +67,16 @@ public class CharacterGenerator : MonoBehaviour {
 		//++++++++++++++++++++
 		//STEP 2
 		//
-		//Race
+		//Species
 		//
-		//Now that we know the current era, we can pick a race from the pool of the ones available, if race is set to random
-		if (race == CharacterClass.Race.Random){
-			//Load up all the predefined available races based on the era we selected above.
-			List<CharacterClass.Race> availableRacesinSelectedEra = eraDefinition[character.era].availableRacesInEra;
-			character.race = availableRacesinSelectedEra[Random.Range(1,availableRacesinSelectedEra.Count)];
+		//Now that we know the current era, we can pick a species from the pool of the ones available, if species is set to random
+		if (species == CharacterClass.Species.Random){
+			//Load up all the predefined available speciess based on the era we selected above.
+			List<CharacterClass.Species> availableSpeciesinSelectedEra = eraDefinition[character.era].availableSpeciesInEra;
+			character.species = availableSpeciesinSelectedEra[Random.Range(1,availableSpeciesinSelectedEra.Count)];
 		}else{
 			//Nevermind, it's set. Just pass it on.
-			character.race = race;
+			character.species = species;
 		}
 
 
@@ -82,8 +85,8 @@ public class CharacterGenerator : MonoBehaviour {
 		//
 		//Stats
 		//
-		//Knowing the race, we can now use the stats recipes to stat up this character according to selected power level
-		
+		//Knowing the species, we can now use the stats recipes to stat up this character according to selected power level
+		RollStats(character.species);
 
 
 		//++++++++++++++++++++
@@ -91,8 +94,12 @@ public class CharacterGenerator : MonoBehaviour {
 		//
 		//Name
 		//
-		//Always nice to have a name.
-
+		//Always nice to have a name. This one's easy.
+		if (characterName == null){
+			character.name = nameManager.GenerateName(character.species);
+		}else{
+			character.name = characterName;
+		}
 
 
 		//++++++++++++++++++++
@@ -100,7 +107,7 @@ public class CharacterGenerator : MonoBehaviour {
 		//
 		//Gifts
 		//
-		//Same deal as choosing race, compare to era and pick a gift at random. This one however is weighted towards no gift based on powerlevel.
+		//Same deal as choosing species, compare to era and pick a gift at random. This one however is weighted towards no gift based on powerlevel.
 
 
 
@@ -118,7 +125,7 @@ public class CharacterGenerator : MonoBehaviour {
 		//
 		//Age
 		//
-		//We know current year and race. Let's chuck up a random age class, generate an age within that and subtract it from current year to get YoB.
+		//We know current year and species. Let's chuck up a random age class, generate an age within that and subtract it from current year to get YoB.
 	}
 
 //===========================================================================
@@ -147,6 +154,34 @@ public class CharacterGenerator : MonoBehaviour {
 	}
 
 
+	void RollStats(CharacterClass.Species speciesToRollFor){
+		//Generate stats for any species depending on powerlevel set. This will only work locally inside this script and only has character generation use!
+		var tempBrains = 0;
+		var tempBrawn = 0;
+		var tempSkin = 0;
+		var tempTongue = 0;
+		int tempPowerLevel;
+		if (powerLevel == 0){
+			//Looks like bullshit. Count entries in powerlevel enum, generate random then bump it by 1 to include max and exclude "random".
+			tempPowerLevel = Random.Range(0, System.Enum.GetValues(typeof(CharacterClass.PowerLevel)).Length) + 1;
+		}else{
+			tempPowerLevel = (int)powerLevel;
+		}
+		//iterate through each power level granted. Each time roll a dice between 1 and dice size of that species.
+		for (int i = 0; i < tempPowerLevel; i++){
+			tempBrains += Random.Range(0,speciesDefinition[speciesToRollFor].dieSize_Brains) + 1;
+			tempBrawn += Random.Range(0,speciesDefinition[speciesToRollFor].dieSize_Brawn) + 1;
+			tempSkin += Random.Range(0,speciesDefinition[speciesToRollFor].dieSize_Skin) + 1;
+			tempTongue += Random.Range(0,speciesDefinition[speciesToRollFor].dieSize_Tongue) + 1;
+		}
+		//finally, apply and send the form off.
+		character.brains = tempBrains;
+		character.brawn = tempBrawn;	
+		character.skin = tempSkin;	
+		character.tongue = tempTongue;			
+	}
+
+
 
 //===========================================================================
 	//Dictionary definition setup
@@ -155,34 +190,34 @@ public class CharacterGenerator : MonoBehaviour {
 
 		//Era dicitionary
 		eraDefinition = new Dictionary<CharacterClass.Era,CoreValues.EraClass>();
-		raceDefinition = new Dictionary<CharacterClass.Race,CoreValues.RaceClass>();
+		speciesDefinition = new Dictionary<CharacterClass.Species,CoreValues.SpeciesClass>();
 
-		//Prebuild race libraries
-		List<CharacterClass.Race> preMagusdawnRaceList = new List<CharacterClass.Race>();
-		preMagusdawnRaceList.Add(CharacterClass.Race.Askadur);
-		preMagusdawnRaceList.Add(CharacterClass.Race.Faeryn);
-		preMagusdawnRaceList.Add(CharacterClass.Race.Kanina);
-		preMagusdawnRaceList.Add(CharacterClass.Race.Lifindur);
-		preMagusdawnRaceList.Add(CharacterClass.Race.Madur);
-		preMagusdawnRaceList.Add(CharacterClass.Race.Nyrn);
-		preMagusdawnRaceList.Add(CharacterClass.Race.Skjomadur);
-		preMagusdawnRaceList.Add(CharacterClass.Race.Troll);
-		preMagusdawnRaceList.Add(CharacterClass.Race.Vidur);
-		preMagusdawnRaceList.Add(CharacterClass.Race.UrminnAdult);
-		preMagusdawnRaceList.Add(CharacterClass.Race.UrminnYoung);
+		//Prebuild species libraries
+		List<CharacterClass.Species> preMagusdawnSpeciesList = new List<CharacterClass.Species>();
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.Askadur);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.Faeryn);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.Kanina);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.Lifindur);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.Madur);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.Nyrn);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.Skjomadur);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.Troll);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.Vidur);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.UrminnAdult);
+		preMagusdawnSpeciesList.Add(CharacterClass.Species.UrminnYoung);
 
-		List<CharacterClass.Race> postMagusdawnRaceList = new List<CharacterClass.Race>();
-		postMagusdawnRaceList.Add(CharacterClass.Race.Askadur);
-		postMagusdawnRaceList.Add(CharacterClass.Race.Faeryn);
-		postMagusdawnRaceList.Add(CharacterClass.Race.Kanina);
-		postMagusdawnRaceList.Add(CharacterClass.Race.Draugur);
-		postMagusdawnRaceList.Add(CharacterClass.Race.Madur);
-		postMagusdawnRaceList.Add(CharacterClass.Race.Nyrn);
-		postMagusdawnRaceList.Add(CharacterClass.Race.Skjomadur);
-		postMagusdawnRaceList.Add(CharacterClass.Race.Troll);
-		postMagusdawnRaceList.Add(CharacterClass.Race.Vidur);
-		postMagusdawnRaceList.Add(CharacterClass.Race.UrminnAdult);
-		postMagusdawnRaceList.Add(CharacterClass.Race.UrminnYoung);
+		List<CharacterClass.Species> postMagusdawnSpeciesList = new List<CharacterClass.Species>();
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.Askadur);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.Faeryn);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.Kanina);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.Draugur);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.Madur);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.Nyrn);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.Skjomadur);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.Troll);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.Vidur);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.UrminnAdult);
+		postMagusdawnSpeciesList.Add(CharacterClass.Species.UrminnYoung);
 
 		//Prebuild gift libraries
 		List<CharacterClass.Gift> noGiftList = new List<CharacterClass.Gift>();
@@ -211,7 +246,7 @@ public class CharacterGenerator : MonoBehaviour {
 		AstralEra.eraIndex = CharacterClass.Era.AstralEra;
 		AstralEra.eraStartYear = 1;
 		AstralEra.eraEndYear = 2293;
-		AstralEra.availableRacesInEra = preMagusdawnRaceList;
+		AstralEra.availableSpeciesInEra = preMagusdawnSpeciesList;
 		AstralEra.availableGiftsInEra = mediumGiftList;
 
 		//Commit to class
@@ -225,7 +260,7 @@ public class CharacterGenerator : MonoBehaviour {
 		Magusdawn.eraIndex = CharacterClass.Era.Magusdawn;
 		Magusdawn.eraStartYear = 2293;
 		Magusdawn.eraEndYear = 2312;
-		Magusdawn.availableRacesInEra = preMagusdawnRaceList;
+		Magusdawn.availableSpeciesInEra = preMagusdawnSpeciesList;
 		Magusdawn.availableGiftsInEra = mediumGiftList;
 
 		//Commit to class
@@ -239,7 +274,7 @@ public class CharacterGenerator : MonoBehaviour {
 		FirstAgeOfEsper.eraIndex = CharacterClass.Era.FirstAgeOfEsper;
 		FirstAgeOfEsper.eraStartYear = 2312;
 		FirstAgeOfEsper.eraEndYear = 2312+562;
-		FirstAgeOfEsper.availableRacesInEra = postMagusdawnRaceList;
+		FirstAgeOfEsper.availableSpeciesInEra = postMagusdawnSpeciesList;
 		FirstAgeOfEsper.availableGiftsInEra = esperGiftList;
 
 		//Commit to class
@@ -253,7 +288,7 @@ public class CharacterGenerator : MonoBehaviour {
 		SecondAgeOfEsper.eraIndex = CharacterClass.Era.SecondAgeOfEsper;
 		SecondAgeOfEsper.eraStartYear = 2312+562;
 		SecondAgeOfEsper.eraEndYear = 2312+700;
-		SecondAgeOfEsper.availableRacesInEra = postMagusdawnRaceList;
+		SecondAgeOfEsper.availableSpeciesInEra = postMagusdawnSpeciesList;
 		SecondAgeOfEsper.availableGiftsInEra = esperGiftList;
 
 		//Commit to class
@@ -267,7 +302,7 @@ public class CharacterGenerator : MonoBehaviour {
 		ThirdAgeOfEsper.eraIndex = CharacterClass.Era.ThirdAgeOfEsper;
 		ThirdAgeOfEsper.eraStartYear = 2312+700;
 		ThirdAgeOfEsper.eraEndYear = 2312+973;
-		ThirdAgeOfEsper.availableRacesInEra = postMagusdawnRaceList;
+		ThirdAgeOfEsper.availableSpeciesInEra = postMagusdawnSpeciesList;
 		ThirdAgeOfEsper.availableGiftsInEra = esperGiftList;
 
 		//Commit to class
@@ -281,7 +316,7 @@ public class CharacterGenerator : MonoBehaviour {
 		SynsteelAge.eraIndex = CharacterClass.Era.SynsteelAge;
 		SynsteelAge.eraStartYear = 2312+973;
 		SynsteelAge.eraEndYear = 2312+1217;
-		SynsteelAge.availableRacesInEra = postMagusdawnRaceList;
+		SynsteelAge.availableSpeciesInEra = postMagusdawnSpeciesList;
 		SynsteelAge.availableGiftsInEra = allGiftsList;
 
 		//Commit to class
@@ -295,7 +330,7 @@ public class CharacterGenerator : MonoBehaviour {
 		AgeOfUpheaval.eraIndex = CharacterClass.Era.AgeOfUpheaval;
 		AgeOfUpheaval.eraStartYear = 2312+1217;
 		AgeOfUpheaval.eraEndYear = 2312+2312;
-		AgeOfUpheaval.availableRacesInEra = postMagusdawnRaceList;
+		AgeOfUpheaval.availableSpeciesInEra = postMagusdawnSpeciesList;
 		AgeOfUpheaval.availableGiftsInEra = allGiftsList;
 
 		//Commit to class
@@ -309,7 +344,7 @@ public class CharacterGenerator : MonoBehaviour {
 		Astralnight.eraIndex = CharacterClass.Era.Astralnight;
 		Astralnight.eraStartYear = 2312+2312;
 		Astralnight.eraEndYear = 9999;
-		Astralnight.availableRacesInEra = postMagusdawnRaceList;
+		Astralnight.availableSpeciesInEra = postMagusdawnSpeciesList;
 		Astralnight.availableGiftsInEra = allGiftsList;
 
 		//Commit to class
@@ -326,8 +361,8 @@ public class CharacterGenerator : MonoBehaviour {
 	//Askadur
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Askadur = new CoreValues.RaceClass();
-		Askadur.raceIndex = CharacterClass.Race.Askadur;
+		CoreValues.SpeciesClass Askadur = new CoreValues.SpeciesClass();
+		Askadur.speciesIndex = CharacterClass.Species.Askadur;
 		//Dice
 		Askadur.dieSize_Brains = 3;
 		Askadur.dieSize_Brawn = 4;
@@ -342,14 +377,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Askadur, Askadur);
+		speciesDefinition.Add(CharacterClass.Species.Askadur, Askadur);
 		
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Draugur
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Draugur = new CoreValues.RaceClass();
-		Draugur.raceIndex = CharacterClass.Race.Draugur;
+		CoreValues.SpeciesClass Draugur = new CoreValues.SpeciesClass();
+		Draugur.speciesIndex = CharacterClass.Species.Draugur;
 		//Dice
 		Draugur.dieSize_Brains = 4;
 		Draugur.dieSize_Brawn = 2;
@@ -364,14 +399,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Draugur, Draugur);
+		speciesDefinition.Add(CharacterClass.Species.Draugur, Draugur);
 				
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Faeryn
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Faeryn = new CoreValues.RaceClass();
-		Faeryn.raceIndex = CharacterClass.Race.Faeryn;
+		CoreValues.SpeciesClass Faeryn = new CoreValues.SpeciesClass();
+		Faeryn.speciesIndex = CharacterClass.Species.Faeryn;
 		//Dice
 		Faeryn.dieSize_Brains = 3;
 		Faeryn.dieSize_Brawn = 2;
@@ -386,14 +421,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Faeryn, Faeryn);
+		speciesDefinition.Add(CharacterClass.Species.Faeryn, Faeryn);
 
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Kanina
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Kanina = new CoreValues.Kanina();
-		Kanina.raceIndex = CharacterClass.Race.Kanina;
+		CoreValues.SpeciesClass Kanina = new CoreValues.SpeciesClass();
+		Kanina.speciesIndex = CharacterClass.Species.Kanina;
 		//Dice
 		Kanina.dieSize_Brains = 1;
 		Kanina.dieSize_Brawn = 3;
@@ -408,14 +443,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Kanina, Kanina);
+		speciesDefinition.Add(CharacterClass.Species.Kanina, Kanina);
 
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Madur
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Madur = new CoreValues.Madur();
-		Madur.raceIndex = CharacterClass.Race.Madur;
+		CoreValues.SpeciesClass Madur = new CoreValues.SpeciesClass();
+		Madur.speciesIndex = CharacterClass.Species.Madur;
 		//Dice
 		Madur.dieSize_Brains = 4;
 		Madur.dieSize_Brawn = 2;
@@ -430,14 +465,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Madur, Madur);
+		speciesDefinition.Add(CharacterClass.Species.Madur, Madur);
 		
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Nyrn
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Nyrn = new CoreValues.Nyrn();
-		Nyrn.raceIndex = CharacterClass.Race.Nyrn;
+		CoreValues.SpeciesClass Nyrn = new CoreValues.SpeciesClass();
+		Nyrn.speciesIndex = CharacterClass.Species.Nyrn;
 		//Dice
 		Nyrn.dieSize_Brains = 6;
 		Nyrn.dieSize_Brawn = 2;
@@ -452,14 +487,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Nyrn, Nyrn);
+		speciesDefinition.Add(CharacterClass.Species.Nyrn, Nyrn);
 				
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Skjomadur
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Skjomadur = new CoreValues.Skjomadur();
-		Skjomadur.raceIndex = CharacterClass.Race.Skjomadur;
+		CoreValues.SpeciesClass Skjomadur = new CoreValues.SpeciesClass();
+		Skjomadur.speciesIndex = CharacterClass.Species.Skjomadur;
 		//Dice
 		Skjomadur.dieSize_Brains = 3;
 		Skjomadur.dieSize_Brawn = 3;
@@ -474,14 +509,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Skjomadur, Skjomadur);
+		speciesDefinition.Add(CharacterClass.Species.Skjomadur, Skjomadur);
 						
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Troll
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Troll = new CoreValues.Troll();
-		Troll.raceIndex = CharacterClass.Race.Troll;
+		CoreValues.SpeciesClass Troll = new CoreValues.SpeciesClass();
+		Troll.speciesIndex = CharacterClass.Species.Troll;
 		//Dice
 		Troll.dieSize_Brains = 1;
 		Troll.dieSize_Brawn = 4;
@@ -496,14 +531,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Troll, Troll);
+		speciesDefinition.Add(CharacterClass.Species.Troll, Troll);
 								
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Vidur
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Vidur = new CoreValues.Vidur();
-		Vidur.raceIndex = CharacterClass.Race.Vidur;
+		CoreValues.SpeciesClass Vidur = new CoreValues.SpeciesClass();
+		Vidur.speciesIndex = CharacterClass.Species.Vidur;
 		//Dice
 		Vidur.dieSize_Brains = 4;
 		Vidur.dieSize_Brawn = 1;
@@ -518,14 +553,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Vidur, Vidur);
+		speciesDefinition.Add(CharacterClass.Species.Vidur, Vidur);
 										
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Lifindur
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass Lifindur = new CoreValues.Lifindur();
-		Vidur.raceIndex = CharacterClass.Race.Lifindur;
+		CoreValues.SpeciesClass Lifindur = new CoreValues.SpeciesClass();
+		Vidur.speciesIndex = CharacterClass.Species.Lifindur;
 		//Dice
 		Lifindur.dieSize_Brains = 6;
 		Lifindur.dieSize_Brawn = 1;
@@ -540,28 +575,50 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Lifindur, Lifindur);
+		speciesDefinition.Add(CharacterClass.Species.Lifindur, Lifindur);
 												
 	//++++++++++++++++++++++++++++++++++++++++++
 	//UrminnYoung
 	//++++++++++++++++++++++++++++++++++++++++++
 
-		CoreValues.RaceClass UrminnYoung = new CoreValues.UrminnYoung();
-		UrminnYoung.raceIndex = CharacterClass.Race.UrminnYoung;
+		CoreValues.SpeciesClass UrminnYoung = new CoreValues.SpeciesClass();
+		UrminnYoung.speciesIndex = CharacterClass.Species.UrminnYoung;
 		//Dice
-		UrminnYoung.dieSize_Brains = 6;
-		Lifindur.dieSize_Brawn = 1;
-		Lifindur.dieSize_Skin = 2;
-		Lifindur.dieSize_Tongue = 4;
+		UrminnYoung.dieSize_Brains = 4;
+		UrminnYoung.dieSize_Brawn = 2;
+		UrminnYoung.dieSize_Skin = 1;
+		UrminnYoung.dieSize_Tongue = 4;
 		//Ages
-		Lifindur.ageRange_Adolescent = new Vector2(1,2);
-		Lifindur.ageRange_YoungAdult = new Vector2(2,28);
-		Lifindur.ageRange_MiddleAge = new Vector2(28,60);
-		Lifindur.ageRange_Old = new Vector2(60,120);
-		Lifindur.ageRange_Ancient = new Vector2(120,190);
+		UrminnYoung.ageRange_Adolescent = new Vector2(15,24);
+		UrminnYoung.ageRange_YoungAdult = new Vector2(24,40);
+		UrminnYoung.ageRange_MiddleAge = new Vector2(40,60);
+		UrminnYoung.ageRange_Old = new Vector2(60,85);
+		UrminnYoung.ageRange_Ancient = new Vector2(85,125);
 
 
 		//Commit to class
-		raceDefinition.Add(CharacterClass.Race.Lifindur, Lifindur);
+		speciesDefinition.Add(CharacterClass.Species.UrminnYoung, UrminnYoung);
+														
+	//++++++++++++++++++++++++++++++++++++++++++
+	//UrminnAdult
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.SpeciesClass UrminnAdult = new CoreValues.SpeciesClass();
+		UrminnAdult.speciesIndex = CharacterClass.Species.UrminnAdult;
+		//Dice
+		UrminnAdult.dieSize_Brains = 1;
+		UrminnAdult.dieSize_Brawn = 6;
+		UrminnAdult.dieSize_Skin = 3;
+		UrminnAdult.dieSize_Tongue = 3;
+		//Ages
+		UrminnAdult.ageRange_Adolescent = new Vector2(15,24);
+		UrminnAdult.ageRange_YoungAdult = new Vector2(24,40);
+		UrminnAdult.ageRange_MiddleAge = new Vector2(40,60);
+		UrminnAdult.ageRange_Old = new Vector2(60,85);
+		UrminnAdult.ageRange_Ancient = new Vector2(85,125);
+
+
+		//Commit to class
+		speciesDefinition.Add(CharacterClass.Species.UrminnAdult, UrminnAdult);
 	}
 }

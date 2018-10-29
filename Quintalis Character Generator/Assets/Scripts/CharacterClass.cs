@@ -7,7 +7,7 @@ using UnityEngine;
 //using the classes defined in CoreValues.
 
 public static class CharacterClass {
-	public enum Race {
+	public enum Species {
 		Random,
 		Madur,
 		Askadur,

@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\CoreValues.cs" />
      <Compile Include="Assets\Scripts\NameManager.cs" />
      <Compile Include="Assets\Scripts\WorldCreation.cs" />
+     <None Include="Assets\Resources\Nyrn_nameParts.txt" />
      <None Include="Assets\Resources\Vidur_nameParts.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>J:/Git/CharacterGen/Quintalis Character Generator/Quintalis Character Generator/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

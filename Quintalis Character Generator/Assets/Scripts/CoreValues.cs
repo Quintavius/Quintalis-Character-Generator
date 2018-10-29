@@ -12,13 +12,13 @@ public static class CoreValues {
 		public CharacterClass.Era eraIndex;
 		public int eraStartYear;
 		public int eraEndYear;
-		public List<CharacterClass.Race> availableRacesInEra;
+		public List<CharacterClass.Species> availableSpeciesInEra;
 		public List<CharacterClass.Gift> availableGiftsInEra;
 	}
 
-	//Race info
-	public class RaceClass{
-		public CharacterClass.Race raceIndex;
+	//Species info
+	public class SpeciesClass{
+		public CharacterClass.Species speciesIndex;
 		public int dieSize_Brains;
 		public int dieSize_Brawn;
 		public int dieSize_Skin;

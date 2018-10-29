@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class NameManager : MonoBehaviour {
 
-	public TextAsset vidurNameParts;	
+	public TextAsset vidurNameParts;
+	public TextAsset nyrnNameParts;
 
 	string[] vidurNameParts_List;
+	string[] nyrnNameParts_List;
 
 	void Start (){
 		InitializeNames();
@@ -15,48 +17,50 @@ public class NameManager : MonoBehaviour {
 //===========================================================================
 	//Main name generation function
 
-	void GenerateName (CharacterClass.Race raceToName) {
+	public string GenerateName (CharacterClass.Species raceToName) {
+		string tempName = "Johnny";
 		switch (raceToName){
-			case CharacterClass.Race.Askadur:
+			case CharacterClass.Species.Askadur:
 				;
 				break;
-			case CharacterClass.Race.Draugur:
+			case CharacterClass.Species.Draugur:
 				;
 				break;
-			case CharacterClass.Race.Faeryn:
+			case CharacterClass.Species.Faeryn:
 				;
 				break;
-			case CharacterClass.Race.Kanina:
+			case CharacterClass.Species.Kanina:
 				;
 				break;
-			case CharacterClass.Race.Lifindur:
+			case CharacterClass.Species.Lifindur:
 				;
 				break;
-			case CharacterClass.Race.Madur:
+			case CharacterClass.Species.Madur:
 				;
 				break;
-			case CharacterClass.Race.Nyrn:
+			case CharacterClass.Species.Nyrn:
 				;
 				break;
-			case CharacterClass.Race.Skjomadur:
+			case CharacterClass.Species.Skjomadur:
 				;
 				break;
-			case CharacterClass.Race.Troll:
+			case CharacterClass.Species.Troll:
 				;
 				break;
-			case CharacterClass.Race.UrminnAdult:
+			case CharacterClass.Species.UrminnAdult:
 				;
 				break;
-			case CharacterClass.Race.UrminnYoung:
+			case CharacterClass.Species.UrminnYoung:
 				;
 				break;
-			case CharacterClass.Race.Vidur:
+			case CharacterClass.Species.Vidur:
 				;
 				break;
 			default:
-			//Race doesn't match
+			//Species doesn't match
 				break;
 		}
+		return tempName;
 	}
 
 //===========================================================================
@@ -68,6 +72,11 @@ public class NameManager : MonoBehaviour {
 	//Vidur list creation
 	//++++++++++++++++++++++++++++++++++++++++++
 		vidurNameParts_List = vidurNameParts.text.Split("\n"[0]);
+
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Nyrn list creation
+	//++++++++++++++++++++++++++++++++++++++++++
+		nyrnNameParts_List = nyrnNameParts.text.Split("\n"[0]);
 
 	}
 }
