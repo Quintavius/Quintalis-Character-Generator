@@ -16,8 +16,19 @@ public static class CoreValues {
 		public List<CharacterClass.Gift> availableGiftsInEra;
 	}
 
-	//Age settings by race
+	//Race info
+	public class RaceClass{
+		public CharacterClass.Race raceIndex;
+		public int dieSize_Brains;
+		public int dieSize_Brawn;
+		public int dieSize_Skin;
+		public int dieSize_Tongue;
+		public Vector2 ageRange_Adolescent;
+		public Vector2 ageRange_YoungAdult;
+		public Vector2 ageRange_MiddleAge;
+		public Vector2 ageRange_Old;
+		public Vector2 ageRange_Ancient;
+	}
 
 
-	//Base rolls for stat by race
 }

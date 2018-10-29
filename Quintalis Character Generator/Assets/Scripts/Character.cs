@@ -14,6 +14,7 @@ public class Character : MonoBehaviour {
 	public int tongue;
 	public int age;
 	public int yearOfBirth;
+	public int currentYear;
 	public CharacterClass.AgeGroup ageGroup;
 	public CharacterClass.Era era;
 	public CharacterClass.Race race;

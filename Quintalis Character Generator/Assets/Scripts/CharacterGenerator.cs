@@ -10,6 +10,8 @@ public class CharacterGenerator : MonoBehaviour {
 	//Works by doing Dictionary<[Enum Reference],[Class container that has all the deetz]>
 	public Dictionary<CharacterClass.Era,CoreValues.EraClass> eraDefinition;
 		//Contains era start & end, available races and gifts per era.
+	public Dictionary<CharacterClass.Race,CoreValues.RaceClass> raceDefinition;
+		//Contains age ranges and stat dice.
 
 
 //===========================================================================
@@ -50,12 +52,12 @@ public class CharacterGenerator : MonoBehaviour {
 				character.era = era;
 			}
 			//Era is now set, now generate a current year.
-			currentYear = GetYearFromEra(character.era);
+			character.currentYear = GetYearFromEra(character.era);
 			
 		}else{
 			//Year is specified, match it with an era and pass it to the character
-			era = GetEraFromYear(currentYear);
-			character.era = era;
+			character.currentYear = currentYear;
+			character.era = GetEraFromYear(currentYear);
 		}
 
 
@@ -66,11 +68,57 @@ public class CharacterGenerator : MonoBehaviour {
 		//
 		//Now that we know the current era, we can pick a race from the pool of the ones available, if race is set to random
 		if (race == CharacterClass.Race.Random){
-			//character.race = 
+			//Load up all the predefined available races based on the era we selected above.
+			List<CharacterClass.Race> availableRacesinSelectedEra = eraDefinition[character.era].availableRacesInEra;
+			character.race = availableRacesinSelectedEra[Random.Range(1,availableRacesinSelectedEra.Count)];
 		}else{
 			//Nevermind, it's set. Just pass it on.
 			character.race = race;
 		}
+
+
+		//++++++++++++++++++++
+		//STEP 3
+		//
+		//Stats
+		//
+		//Knowing the race, we can now use the stats recipes to stat up this character according to selected power level
+
+
+
+		//++++++++++++++++++++
+		//STEP 4
+		//
+		//Name
+		//
+		//Always nice to have a name.
+
+
+
+		//++++++++++++++++++++
+		//STEP 5
+		//
+		//Gifts
+		//
+		//Same deal as choosing race, compare to era and pick a gift at random. This one however is weighted towards no gift based on powerlevel.
+
+
+
+		//++++++++++++++++++++
+		//STEP 5.1
+		//
+		//Gift details
+		//
+		//If any gifts have been given out, find out more about them.
+
+
+
+		//++++++++++++++++++++
+		//STEP 6
+		//
+		//Age
+		//
+		//We know current year and race. Let's chuck up a random age based on the maximum range of the race and subtract it from current year to get YoB, age group and age.
 	}
 
 //===========================================================================
@@ -99,6 +147,7 @@ public class CharacterGenerator : MonoBehaviour {
 	}
 
 
+
 //===========================================================================
 	//Dictionary definition setup
 
@@ -106,6 +155,7 @@ public class CharacterGenerator : MonoBehaviour {
 
 		//Era dicitionary
 		eraDefinition = new Dictionary<CharacterClass.Era,CoreValues.EraClass>();
+		raceDefinition = new Dictionary<CharacterClass.Race,CoreValues.RaceClass>();
 
 		//Prebuild race libraries
 		List<CharacterClass.Race> preMagusdawnRaceList = new List<CharacterClass.Race>();
@@ -264,5 +314,35 @@ public class CharacterGenerator : MonoBehaviour {
 
 		//Commit to class
 		eraDefinition.Add(CharacterClass.Era.Astralnight, Astralnight);
+
+
+
+//=======================================================
+//||||||||||||||||||RACES||||||||||||||||||||||
+//=======================================================
+
+
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Askadur
+	//++++++++++++++++++++++++++++++++++++++++++
+
+		CoreValues.RaceClass Askadur = new CoreValues.RaceClass();
+		Askadur.raceIndex = CharacterClass.Race.Askadur;
+		//Dice
+		Askadur.dieSize_Brains = 3;
+		Askadur.dieSize_Brawn = 4;
+		Askadur.dieSize_Skin = 4;
+		Askadur.dieSize_Tongue = 1;
+		//Ages
+		Askadur.ageRange_Adolescent = new Vector2(30,60);
+		Askadur.ageRange_YoungAdult = new Vector2(60,100);
+		Askadur.ageRange_MiddleAge = new Vector2(100,150);
+		Askadur.ageRange_Old = new Vector2(150,175);
+		Askadur.ageRange_Ancient = new Vector2(175,275);
+
+
+		//Commit to class
+		raceDefinition.Add(CharacterClass.Race.Askadur, Askadur);
+
 	}
 }
