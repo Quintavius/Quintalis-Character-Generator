@@ -8,6 +8,7 @@ using UnityEngine;
 //Let's try and keep things clean by not making this /do/ anything
 
 public class Character : MonoBehaviour {
+	public string characterName;
 	public int brains;
 	public int brawn;
 	public int skin;

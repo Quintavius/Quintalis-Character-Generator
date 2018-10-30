@@ -19,11 +19,13 @@ public class CharacterGenerator : MonoBehaviour {
 	//Public generation settings, changed by user input. These are overrides, basically.
 
 	public string characterName;
+	public int age;
 	public int currentYear;
 	public CharacterClass.PowerLevel powerLevel;
 	public CharacterClass.Era era;
 	public CharacterClass.Species species;
 	public CharacterClass.Gift gift;
+	public CharacterClass.AgeGroup ageGroup;
 
 //===========================================================================
 	//References
@@ -73,7 +75,7 @@ public class CharacterGenerator : MonoBehaviour {
 		if (species == CharacterClass.Species.Random){
 			//Load up all the predefined available speciess based on the era we selected above.
 			List<CharacterClass.Species> availableSpeciesinSelectedEra = eraDefinition[character.era].availableSpeciesInEra;
-			character.species = availableSpeciesinSelectedEra[Random.Range(1,availableSpeciesinSelectedEra.Count)];
+			character.species = availableSpeciesinSelectedEra[Random.Range(0,availableSpeciesinSelectedEra.Count)];
 		}else{
 			//Nevermind, it's set. Just pass it on.
 			character.species = species;
@@ -92,18 +94,40 @@ public class CharacterGenerator : MonoBehaviour {
 		//++++++++++++++++++++
 		//STEP 4
 		//
-		//Name
+		//Age
 		//
-		//Always nice to have a name. This one's easy.
-		if (characterName == null){
-			character.name = nameManager.GenerateName(character.species);
-		}else{
-			character.name = characterName;
+		//We know current year and species. Let's chuck up a random age class, generate an age within that and subtract it from current year to get YoB.
+		if (age == 0){											//Age isn't specified at all. Is age group specified?
+			if (ageGroup == CharacterClass.AgeGroup.Random){	//Age group is random, pick one of those first
+				character.ageGroup = (CharacterClass.AgeGroup)Random.Range(1,System.Enum.GetValues(typeof(CharacterClass.AgeGroup)).Length);
+			}else{												//Age group is set. Just pass it on.
+				character.ageGroup = ageGroup;
+			}
+			//Now we have our age group, time to slam out an age inside that age group for the chosen species.
+			character.age = GetAgeFromAgeGroup(character.ageGroup,character.species);
+		}else{													//Age is already defined, just assign it and match it with an age class.
+		character.age = age;
+		character.ageGroup = GetAgeGroupFromAge(character.age, character.species);	
 		}
+		//Almost done, now get year of birth
+		character.yearOfBirth = character.currentYear - character.age;
 
 
 		//++++++++++++++++++++
 		//STEP 5
+		//
+		//Name
+		//
+		//Always nice to have a name. This one's easy.
+		if (characterName == ""){
+			character.characterName = nameManager.GenerateName(character.species);
+		}else{
+			character.characterName = characterName;
+		}
+
+
+		//++++++++++++++++++++
+		//STEP 6
 		//
 		//Gifts
 		//
@@ -112,7 +136,7 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 		//++++++++++++++++++++
-		//STEP 5.1
+		//STEP 6.1
 		//
 		//Gift details
 		//
@@ -120,12 +144,6 @@ public class CharacterGenerator : MonoBehaviour {
 
 
 
-		//++++++++++++++++++++
-		//STEP 6
-		//
-		//Age
-		//
-		//We know current year and species. Let's chuck up a random age class, generate an age within that and subtract it from current year to get YoB.
 	}
 
 //===========================================================================
@@ -154,6 +172,31 @@ public class CharacterGenerator : MonoBehaviour {
 	}
 
 
+	//Some age tools
+	int GetAgeFromAgeGroup(CharacterClass.AgeGroup ageGroupToProcess, CharacterClass.Species speciesToAge){
+		int ageToReturn;
+		switch (ageGroupToProcess){
+			case CharacterClass.AgeGroup.Adolescent: ageToReturn = Random.Range((int)speciesDefinition[speciesToAge].ageRange_Adolescent.x,(int)speciesDefinition[speciesToAge].ageRange_Adolescent.y); break;
+			case CharacterClass.AgeGroup.YoungAdult: ageToReturn = Random.Range((int)speciesDefinition[speciesToAge].ageRange_YoungAdult.x,(int)speciesDefinition[speciesToAge].ageRange_YoungAdult.y); break;
+			case CharacterClass.AgeGroup.MiddleAge: ageToReturn = Random.Range((int)speciesDefinition[speciesToAge].ageRange_MiddleAge.x,(int)speciesDefinition[speciesToAge].ageRange_MiddleAge.y); break;
+			case CharacterClass.AgeGroup.Old: ageToReturn = Random.Range((int)speciesDefinition[speciesToAge].ageRange_Old.x,(int)speciesDefinition[speciesToAge].ageRange_Old.y); break;
+			case CharacterClass.AgeGroup.Ancient: ageToReturn = Random.Range((int)speciesDefinition[speciesToAge].ageRange_Ancient.x,(int)speciesDefinition[speciesToAge].ageRange_Ancient.y); break;
+			default: ageToReturn = 0; break;
+		}
+		return ageToReturn;
+	}
+
+	CharacterClass.AgeGroup GetAgeGroupFromAge(int agetoProcess, CharacterClass.Species speciesToAge){
+		CharacterClass.AgeGroup ageGroupToReturn = CharacterClass.AgeGroup.Adolescent;
+		var s = speciesDefinition[speciesToAge];
+		if (agetoProcess >= s.ageRange_Adolescent.x && agetoProcess < s.ageRange_Adolescent.y) {ageGroupToReturn = CharacterClass.AgeGroup.Adolescent;}
+		else if (agetoProcess >= s.ageRange_YoungAdult.x && agetoProcess < s.ageRange_YoungAdult.y) {ageGroupToReturn = CharacterClass.AgeGroup.YoungAdult;}
+		else if (agetoProcess >= s.ageRange_MiddleAge.x && agetoProcess < s.ageRange_MiddleAge.y) {ageGroupToReturn = CharacterClass.AgeGroup.MiddleAge;}
+		else if (agetoProcess >= s.ageRange_Old.x && agetoProcess < s.ageRange_Old.y) {ageGroupToReturn = CharacterClass.AgeGroup.Old;}
+		else if (agetoProcess >= s.ageRange_Ancient.x && agetoProcess < s.ageRange_Ancient.y) {ageGroupToReturn = CharacterClass.AgeGroup.Ancient;}
+		return ageGroupToReturn;
+	}
+
 	void RollStats(CharacterClass.Species speciesToRollFor){
 		//Generate stats for any species depending on powerlevel set. This will only work locally inside this script and only has character generation use!
 		var tempBrains = 0;
@@ -163,7 +206,7 @@ public class CharacterGenerator : MonoBehaviour {
 		int tempPowerLevel;
 		if (powerLevel == 0){
 			//Looks like bullshit. Count entries in powerlevel enum, generate random then bump it by 1 to include max and exclude "random".
-			tempPowerLevel = Random.Range(0, System.Enum.GetValues(typeof(CharacterClass.PowerLevel)).Length) + 1;
+			tempPowerLevel = Random.Range(1, System.Enum.GetValues(typeof(CharacterClass.PowerLevel)).Length);
 		}else{
 			tempPowerLevel = (int)powerLevel;
 		}

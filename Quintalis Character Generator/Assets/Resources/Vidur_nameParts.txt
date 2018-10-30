@@ -15,3 +15,6 @@ green
 thorn
 flower
 bark
+whisper
+wind
+berry

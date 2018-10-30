@@ -499,11 +499,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: 
+  age: 0
   currentYear: 0
   powerLevel: 0
   era: 0
-  species: 0
+  species: 6
   gift: 0
+  ageGroup: 0
 --- !u!114 &1106650278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935ad09ec2e4c6340bda914828a2a3ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
   brains: 0
   brawn: 0
   skin: 0
@@ -554,6 +557,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vidurNameParts: {fileID: 4900000, guid: 013f9798a2171c544b3244180a387f74, type: 3}
   nyrnNameParts: {fileID: 4900000, guid: 7a78ddb11eec3394b98f7df13aeb5d32, type: 3}
+  trollLetters_Consonant: {fileID: 4900000, guid: cc7aff8d198be5641aa0bb21ffca40e2,
+    type: 3}
+  trollLetters_Vowel: {fileID: 4900000, guid: 1df6f4dc0c318b84d8c33b6e691ce14e, type: 3}
+  trollLetters_Double: {fileID: 4900000, guid: 6dc0bce2507a0a44d81f7c61ff2c8266, type: 3}
 --- !u!1 &2093135619
 GameObject:
   m_ObjectHideFlags: 0
