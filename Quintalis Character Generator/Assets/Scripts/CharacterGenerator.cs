@@ -26,6 +26,8 @@ public class CharacterGenerator : MonoBehaviour {
 	public CharacterClass.Species species;
 	public CharacterClass.Gift gift;
 	public CharacterClass.AgeGroup ageGroup;
+	public CharacterClass.Esper esper;
+	public CharacterClass.Pantheon pantheon;
 
 //===========================================================================
 	//References
@@ -134,6 +136,26 @@ public class CharacterGenerator : MonoBehaviour {
 		//Gifts
 		//
 		//Same deal as choosing species, compare to era and pick a gift at random. This one however is weighted towards no gift based on powerlevel.
+		if (gift == CharacterClass.Gift.Random){
+			var availableGifts = eraDefinition[character.era].availableGiftsInEra;
+			int tempPowerLevel;
+
+			if (powerLevel == CharacterClass.PowerLevel.Random){
+				tempPowerLevel = Random.Range(1, System.Enum.GetValues(typeof(CharacterClass.PowerLevel)).Length);
+			}else{
+				tempPowerLevel = (int)powerLevel;
+			}
+
+			int giftChance = Random.Range(0,100) * tempPowerLevel;
+			if (giftChance < 85){
+				character.gift = CharacterClass.Gift.None;
+			}else{
+				var avail = eraDefinition[character.era].availableGiftsInEra;
+				character.gift = avail[Random.Range(0,avail.Count)];
+			}
+		}else{
+			character.gift = gift;
+		}
 
 
 
@@ -143,7 +165,32 @@ public class CharacterGenerator : MonoBehaviour {
 		//Gift details
 		//
 		//If any gifts have been given out, find out more about them.
-
+		switch (character.gift){
+			case CharacterClass.Gift.None: 
+				character.pantheon = CharacterClass.Pantheon.None;
+				character.esper = CharacterClass.Esper.None; 
+				break;
+			case CharacterClass.Gift.Syn: 
+				character.pantheon = CharacterClass.Pantheon.None;
+				character.esper = CharacterClass.Esper.None; 
+				break;
+			case CharacterClass.Gift.Esper: 
+				character.pantheon = CharacterClass.Pantheon.None;
+				if (esper == CharacterClass.Esper.Random || esper == CharacterClass.Esper.None){
+					character.esper = (CharacterClass.Esper)Random.Range(2,System.Enum.GetValues(typeof(CharacterClass.Esper)).Length);
+				}else{
+					character.esper = esper;
+				}
+				break;
+			case CharacterClass.Gift.Medium: 
+				if (pantheon == CharacterClass.Pantheon.Random || pantheon == CharacterClass.Pantheon.None){
+					character.pantheon = (CharacterClass.Pantheon)Random.Range(2,System.Enum.GetValues(typeof(CharacterClass.Pantheon)).Length);
+				}else{
+					character.pantheon = pantheon;
+				}
+				character.esper = CharacterClass.Esper.None; 
+				break;
+		}
 
 
 	}

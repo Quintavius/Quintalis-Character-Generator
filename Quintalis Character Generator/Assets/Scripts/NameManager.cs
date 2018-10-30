@@ -9,12 +9,14 @@ public class NameManager : MonoBehaviour {
 	public TextAsset trollLetters_Consonant;
 	public TextAsset trollLetters_Vowel;
 	public TextAsset trollLetters_Double;
+	public TextAsset askadurNameParts;
 
 	string[] vidurNameParts_List;
 	string[] nyrnNameParts_List;
 	string[] trollLetters_Consonant_List;
 	string[] trollLetters_Vowel_List;
 	string[] trollLetters_Double_List;
+	string[] askadurNameParts_List;
 
 	Character character;
 
@@ -30,7 +32,9 @@ public class NameManager : MonoBehaviour {
 		string tempName = "";
 		switch (raceToName){
 			case CharacterClass.Species.Askadur:
-				;
+				tempName += askadurNameParts_List[Random.Range(0,askadurNameParts_List.Length)];
+				tempName += askadurNameParts_List[Random.Range(0,askadurNameParts_List.Length)];
+				tempName += askadurNameParts_List[Random.Range(0,askadurNameParts_List.Length)];
 				break;
 			case CharacterClass.Species.Draugur:
 				;
@@ -111,6 +115,11 @@ public class NameManager : MonoBehaviour {
 	//Nyrn list creation
 	//++++++++++++++++++++++++++++++++++++++++++
 		nyrnNameParts_List = nyrnNameParts.text.Split("\n"[0]);
+
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Nyrn list creation
+	//++++++++++++++++++++++++++++++++++++++++++
+		askadurNameParts_List = askadurNameParts.text.Split("\n"[0]);
 
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Troll list creation

@@ -68,6 +68,7 @@
      <None Include="Assets\Resources\Vidur_nameParts.txt" />
      <None Include="Assets\Resources\Troll_vowels.txt" />
      <None Include="Assets\Resources\Troll_consonants.txt" />
+     <None Include="Assets\Resources\Askadur_nameParts.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>J:/Git/CharacterGen/Quintalis Character Generator/Quintalis Character Generator/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
