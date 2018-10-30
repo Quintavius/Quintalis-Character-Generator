@@ -105,7 +105,9 @@ public class CharacterGenerator : MonoBehaviour {
 			}
 			//Now we have our age group, time to slam out an age inside that age group for the chosen species.
 			character.age = GetAgeFromAgeGroup(character.ageGroup,character.species);
-		}else{													//Age is already defined, just assign it and match it with an age class.
+		}else{
+			if (age > speciesDefinition[character.species].ageRange_Ancient.y){age = (int)speciesDefinition[character.species].ageRange_Ancient.y;} //Quick safeguard
+																//Age is already defined, just assign it and match it with an age class.
 		character.age = age;
 		character.ageGroup = GetAgeGroupFromAge(character.age, character.species);	
 		}

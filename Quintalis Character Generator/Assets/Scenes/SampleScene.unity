@@ -499,11 +499,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: 
-  age: 0
+  age: 99999999
   currentYear: 0
   powerLevel: 0
   era: 0
-  species: 6
+  species: 7
   gift: 0
   ageGroup: 0
 --- !u!114 &1106650278
