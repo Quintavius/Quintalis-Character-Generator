@@ -63,9 +63,17 @@
      <Compile Include="Assets\Scripts\CoreValues.cs" />
      <Compile Include="Assets\Scripts\NameManager.cs" />
      <Compile Include="Assets\Scripts\WorldCreation.cs" />
+     <None Include="Assets\Resources\Kanina_simpleNames.txt" />
      <None Include="Assets\Resources\Nyrn_nameParts.txt" />
      <None Include="Assets\Resources\Troll_doubles.txt" />
+     <None Include="Assets\Resources\Faeryn_faergoSyllables.txt" />
      <None Include="Assets\Resources\Vidur_nameParts.txt" />
+     <None Include="Assets\Resources\Kanina_nameParts_back.txt" />
+     <None Include="Assets\Resources\Madur_firstNames.txt" />
+     <None Include="Assets\Resources\Kanina_nameParts_front.txt" />
+     <None Include="Assets\Resources\Faeryn_karwhenSyllables.txt" />
+     <None Include="Assets\Resources\Madur_lastNames.txt" />
+     <None Include="Assets\Resources\Faeryn_nameParts.txt" />
      <None Include="Assets\Resources\Troll_vowels.txt" />
      <None Include="Assets\Resources\Troll_consonants.txt" />
      <None Include="Assets\Resources\Askadur_nameParts.txt" />

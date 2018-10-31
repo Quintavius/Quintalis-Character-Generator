@@ -503,7 +503,7 @@ MonoBehaviour:
   currentYear: 0
   powerLevel: 0
   era: 0
-  species: 7
+  species: 0
   gift: 0
   ageGroup: 0
   esper: 0
@@ -564,6 +564,14 @@ MonoBehaviour:
   trollLetters_Vowel: {fileID: 4900000, guid: 1df6f4dc0c318b84d8c33b6e691ce14e, type: 3}
   trollLetters_Double: {fileID: 4900000, guid: 6dc0bce2507a0a44d81f7c61ff2c8266, type: 3}
   askadurNameParts: {fileID: 4900000, guid: 9dc91deef9eb502469707d5ae118e6e7, type: 3}
+  faerynNameParts: {fileID: 4900000, guid: 56502feb59b68ff48b37aeb039eac698, type: 3}
+  faerynKarwhenSyls: {fileID: 4900000, guid: e7eaab4b2a4851547b9e35181a307fb6, type: 3}
+  faerynFaergoSyls: {fileID: 4900000, guid: e8d4760774f23c440bd5bd8aa8467129, type: 3}
+  kaninaSimpleNames: {fileID: 4900000, guid: a6d47500bc40e0b4ebf8ea6fd04ac483, type: 3}
+  kaninaFront: {fileID: 4900000, guid: 56ba5b4a3b5ee5345acf963467962476, type: 3}
+  kaninaBack: {fileID: 4900000, guid: 405b78491cf597844b2bdd1b65b3cadd, type: 3}
+  madurFirst: {fileID: 4900000, guid: d96da3d964bbd5c47930cf6569ba0417, type: 3}
+  madurLast: {fileID: 4900000, guid: ee77e6eb259f2494aacd1b9f09a42138, type: 3}
 --- !u!1 &2093135619
 GameObject:
   m_ObjectHideFlags: 0
