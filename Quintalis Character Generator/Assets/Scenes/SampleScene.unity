@@ -503,7 +503,7 @@ MonoBehaviour:
   currentYear: 0
   powerLevel: 0
   era: 0
-  species: 0
+  species: 5
   gift: 0
   ageGroup: 0
   esper: 0
@@ -572,6 +572,12 @@ MonoBehaviour:
   kaninaBack: {fileID: 4900000, guid: 405b78491cf597844b2bdd1b65b3cadd, type: 3}
   madurFirst: {fileID: 4900000, guid: d96da3d964bbd5c47930cf6569ba0417, type: 3}
   madurLast: {fileID: 4900000, guid: ee77e6eb259f2494aacd1b9f09a42138, type: 3}
+  skjomadurFirstNames: {fileID: 4900000, guid: f0ab44d8b7db91248af418e775928f7f, type: 3}
+  skjomadurLastNames: {fileID: 4900000, guid: 26bf9ab17575a934fa919e743df4908f, type: 3}
+  urminnAdultNames: {fileID: 4900000, guid: 7e5e1c0dacc4cb94aade24dc1a56b57a, type: 3}
+  urminnAdultVowels: {fileID: 4900000, guid: 1f5454cc38babe843891d08fe72dd37d, type: 3}
+  urminnYoungNames: {fileID: 4900000, guid: 9d9871359c766f8409d37e7f40cc402e, type: 3}
+  urminnYoungVowels: {fileID: 4900000, guid: b5c21fc763b0b0749a1094d89fe3a943, type: 3}
 --- !u!1 &2093135619
 GameObject:
   m_ObjectHideFlags: 0

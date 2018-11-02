@@ -189,8 +189,8 @@ public class NameManager : MonoBehaviour {
 	}
 	void GenerateSkjomadurName(){
 		//First name
-		if (Random.value <= 0.5){
-		//50/50 chance of skjom name vs random name
+		if (Random.value <= 0.8){
+		//80% chance of skjom name vs random name
 		//Give us a skjom name
 			firstName = skjomadurFirst_List[Random.Range(0,skjomadurFirst_List.Length)];
 		}else{
@@ -199,7 +199,7 @@ public class NameManager : MonoBehaviour {
 			
 			if (randomRaceName == 0){GenerateTrollName(); firstName = tempName;}
 			if (randomRaceName == 1){GenerateAskadurName(); firstName = tempName;}
-			if (randomRaceName == 2){lastName = madurLast_List[Random.Range(0,madurLast_List.Length)];}
+			if (randomRaceName == 2){firstName = madurLast_List[Random.Range(0,madurLast_List.Length)];}
 			if (randomRaceName == 3){
 				if (Random.value >= 0.4){
 					//Long name
@@ -214,7 +214,7 @@ public class NameManager : MonoBehaviour {
 		}
 
 		//Last name, same deal
-		if (Random.value <= 0.5){
+		if (Random.value <= 0.8){
 			if (Random.value <= 0.5){
 				lastName = skjomadurLast_List[Random.Range(0,skjomadurLast_List.Length)];
 			}else{
@@ -228,7 +228,7 @@ public class NameManager : MonoBehaviour {
 			
 			if (randomRaceName == 0){GenerateTrollName(); lastName = tempName;}
 			if (randomRaceName == 1){GenerateAskadurName(); lastName = tempName;}
-			if (randomRaceName == 2){lastName = madurFirst_List[Random.Range(0,madurFirst_List.Length)];}
+			if (randomRaceName == 2){lastName = madurLast_List[Random.Range(0,madurLast_List.Length)];}
 			if (randomRaceName == 3){
 				if (Random.value >= 0.4){
 					//Long name
@@ -242,8 +242,8 @@ public class NameManager : MonoBehaviour {
 			if (randomRaceName == 4){GenerateVidurName(); lastName = tempName;}
 		}
 
-		firstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
-		lastName = char.ToUpper(lastName[0]) + lastName.Substring(1);
+		if (firstName != ""){firstName = char.ToUpper(firstName[0]) + firstName.Substring(1);}
+		if (lastName != ""){lastName = char.ToUpper(lastName[0]) + lastName.Substring(1);}
 		tempName = firstName + " " + lastName;
 	}
 	void GenerateTrollName(){
@@ -266,10 +266,24 @@ public class NameManager : MonoBehaviour {
 		}
 	}
 	void GenerateUrminnName(bool young){
+		string vowel1;
+		string vowel2;
 		if (young){
+			vowel1 = urminnYoungVowels_List[Random.Range(0,urminnYoungVowels_List.Length)];
+			vowel2 = urminnYoungVowels_List[Random.Range(0,urminnYoungVowels_List.Length)];
+
 			tempName = urminnYoungNames_List[Random.Range(0,urminnYoungNames_List.Length)];
+
+			tempName = tempName.Replace("*", vowel1);
+			tempName = tempName.Replace("$", vowel2);
 		}else{
+			vowel1 = urminnAdultVowels_List[Random.Range(0,urminnAdultVowels_List.Length)];
+			vowel2 = urminnAdultVowels_List[Random.Range(0,urminnAdultVowels_List.Length)];
+
 			tempName = urminnAdultNames_List[Random.Range(0,urminnAdultNames_List.Length)];
+
+			tempName = tempName.Replace("*", vowel1);
+			tempName = tempName.Replace("$", vowel2);
 		}
 	}
 	void GenerateVidurName(){

@@ -3,10 +3,10 @@ v*ris
 s*lf
 fl*d
 t*rf
-*nv*
+*nv$
 g*rf
-m*rl*
-*rl*f
+m*rl$
+*rl$f
 m*nf
-*nl*
-v*n*r
+*nl$
+v*n$r
