@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterGenerator : MonoBehaviour {
 	//Reference slots
+	private	UIManager uIManager;
 	private Character character;
 	private NameManager nameManager;
 	
@@ -35,6 +36,7 @@ public class CharacterGenerator : MonoBehaviour {
 	private void Start(){
 		character = GetComponent<Character>();
 		nameManager = GetComponent<NameManager>();
+		uIManager = GetComponent<UIManager>();
 		PopulateDictionaries();
 	}
 
@@ -192,6 +194,7 @@ public class CharacterGenerator : MonoBehaviour {
 				break;
 		}
 
+		uIManager.UpdateUIValues();
 
 	}
 

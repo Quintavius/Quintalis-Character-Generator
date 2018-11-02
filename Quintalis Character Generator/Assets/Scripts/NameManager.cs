@@ -137,7 +137,7 @@ public class NameManager : MonoBehaviour {
 				}
 			}
 			lastName = char.ToUpper(lastName[0]) + lastName.Substring(1);
-			tempName = firstName + " " + lastName;
+			tempName = firstName + '\u00A0' + lastName;
 		}else{
 		//Forbidden (Karwhen)
 			int nameLength = Random.Range(1,3);
@@ -150,7 +150,7 @@ public class NameManager : MonoBehaviour {
 				lastName += faerynKarwhenSyls_List[Random.Range(0,faerynKarwhenSyls_List.Length)];
 			}
 			lastName = char.ToUpper(lastName[0]) + lastName.Substring(1);
-			tempName = firstName + " " + lastName;
+			tempName = firstName + '\u00A0' + lastName;
 		}
 	}
 	void GenerateKaninaName(){
@@ -174,12 +174,12 @@ public class NameManager : MonoBehaviour {
 		}
 		firstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
 		lastName = char.ToUpper(lastName[0]) + lastName.Substring(1);
-		tempName = firstName + " " + lastName;
+		tempName = firstName + '\u00A0' + lastName;
 	}
 	void GenerateMadurName(){
 		firstName = madurFirst_List[Random.Range(0,madurFirst_List.Length)];
 		lastName = madurLast_List[Random.Range(0,madurLast_List.Length)];
-		tempName = firstName + " " + lastName;
+		tempName = firstName + '\u00A0' + lastName;
 	}
 	void GenerateNyrnName(){
 		int syllablesInNyrnsName = Mathf.RoundToInt(character.age / 5);
@@ -244,7 +244,7 @@ public class NameManager : MonoBehaviour {
 
 		if (firstName != ""){firstName = char.ToUpper(firstName[0]) + firstName.Substring(1);}
 		if (lastName != ""){lastName = char.ToUpper(lastName[0]) + lastName.Substring(1);}
-		tempName = firstName + " " + lastName;
+		tempName = firstName + '\u00A0' + lastName;
 	}
 	void GenerateTrollName(){
 		int rulePick = Random.Range(0,3);
