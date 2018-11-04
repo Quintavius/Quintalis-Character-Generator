@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour {
 	public void UpdateUIValues () {
 		txt_CharacterName.text = currentCharacter.characterName;
 		txt_ageValue.text = currentCharacter.age.ToString() + " " + "(" + currentCharacter.ageGroup.ToString() + ")";
-		txt_YoBValue.text = currentCharacter.yearOfBirth.ToString();
+		txt_YoBValue.text = currentCharacter.yearOfBirth.ToString() + " " + "(" + currentCharacter.era.ToString() + ")";
 	}
 
 	void ConvertRawToYear(int rawYear){
@@ -26,6 +26,6 @@ public class UIManager : MonoBehaviour {
 	}
 
 	void ConvertYearToRaw(){
-		
+
 	}
 }
