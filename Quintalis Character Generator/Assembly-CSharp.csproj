@@ -67,6 +67,7 @@
      <None Include="Assets\Resources\Kanina_simpleNames.txt" />
      <None Include="Assets\Resources\Skjomadur_LastNames.txt" />
      <None Include="Assets\Resources\Nyrn_nameParts.txt" />
+     <None Include="Assets\Resources\Draugur_syllables.txt" />
      <None Include="Assets\Resources\Troll_doubles.txt" />
      <None Include="Assets\Resources\UrminnYoung_Names.txt" />
      <None Include="Assets\Resources\Faeryn_faergoSyllables.txt" />
@@ -78,11 +79,13 @@
      <None Include="Assets\Resources\Kanina_nameParts_front.txt" />
      <None Include="Assets\Skybox Shaders\Gradient Skybox.shader" />
      <None Include="Assets\Skybox Shaders\Horizontal Skybox.shader" />
+     <None Include="Assets\Resources\Draugur_eras.txt" />
      <None Include="Assets\Resources\Faeryn_karwhenSyllables.txt" />
      <None Include="Assets\Resources\Madur_lastNames.txt" />
      <None Include="Assets\Skybox Shaders\Horizon With Sun Skybox.shader" />
      <None Include="Assets\Resources\Faeryn_nameParts.txt" />
      <None Include="Assets\Skybox Shaders\RGBM Cubed Skybox.shader" />
+     <None Include="Assets\Resources\Lifindur_Syllables.txt" />
      <None Include="Assets\Resources\UrminnAdult_Vowels.txt" />
      <None Include="Assets\Resources\Troll_vowels.txt" />
      <None Include="Assets\Resources\UrminnAdult_Names.txt" />

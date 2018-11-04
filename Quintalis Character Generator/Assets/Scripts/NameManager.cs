@@ -24,6 +24,9 @@ public class NameManager : MonoBehaviour {
 	public TextAsset urminnAdultVowels;
 	public TextAsset urminnYoungNames;
 	public TextAsset urminnYoungVowels;
+	public TextAsset lifindurSyls;
+	public TextAsset draugurSyls;
+	public TextAsset draugurEra;
 
 	string[] vidurNameParts_List;
 	string[] nyrnNameParts_List;
@@ -45,6 +48,9 @@ public class NameManager : MonoBehaviour {
 	string[] urminnAdultVowels_List;
 	string[] urminnYoungNames_List;
 	string[] urminnYoungVowels_List;
+	string[] lifindurSyls_List;
+	string[] draugurSyls_List;
+	string[] draugurEra_List;
 
 	string firstName;
 	string lastName;
@@ -67,7 +73,7 @@ public class NameManager : MonoBehaviour {
 				GenerateAskadurName();
 				break;
 			case CharacterClass.Species.Draugur:
-				;
+				GenerateDraugurName();;
 				break;
 			case CharacterClass.Species.Faeryn:
 				GenerateFaerynName();
@@ -76,7 +82,7 @@ public class NameManager : MonoBehaviour {
 				GenerateKaninaName();
 				break;
 			case CharacterClass.Species.Lifindur:
-				;
+				GenerateLifindurName();
 				break;
 			case CharacterClass.Species.Madur:
 				GenerateMadurName();
@@ -110,6 +116,23 @@ public class NameManager : MonoBehaviour {
 
 //===========================================================================
 	//Name methods
+	void GenerateDraugurName(){
+		//First name
+		int nameLength = Random.Range(1,3);
+		for (var i = 0; i <= nameLength; i++){
+			firstName += draugurSyls_List[Random.Range(0,draugurSyls_List.Length)];
+		}
+
+		//Last name
+		lastName = draugurEra_List[Random.Range(0,draugurEra_List.Length)];
+		lastName += draugurEra_List[Random.Range(0,draugurEra_List.Length)];
+
+		//Combine names
+		firstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
+		lastName = char.ToUpper(lastName[0]) + lastName.Substring(1);
+		tempName = firstName + " of " + lastName;
+
+	}
 	void GenerateAskadurName(){
 		tempName = askadurNameParts_List[Random.Range(0,askadurNameParts_List.Length)];
 		tempName += askadurNameParts_List[Random.Range(0,askadurNameParts_List.Length)];
@@ -291,6 +314,12 @@ public class NameManager : MonoBehaviour {
 		string part2 = vidurNameParts_List[Random.Range(0,vidurNameParts_List.Length)];
 		tempName = part1 + part2;
 	}
+	void GenerateLifindurName(){
+		int nameLength = Random.Range(1,3);
+		for (var i = 0; i <= nameLength; i++){
+			tempName += lifindurSyls_List[Random.Range(0,lifindurSyls_List.Length)];
+		}
+	}
 
 //===========================================================================
 	//Utilities
@@ -304,6 +333,11 @@ public class NameManager : MonoBehaviour {
 	//Creating all the lists so shit can generate
 
 	void InitializeNames(){
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Draugur list creation
+	//++++++++++++++++++++++++++++++++++++++++++
+		draugurSyls_List = draugurSyls.text.Split("\n"[0]);
+		draugurEra_List = draugurEra.text.Split("\n"[0]);
 
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Vidur list creation
@@ -314,6 +348,11 @@ public class NameManager : MonoBehaviour {
 	//Nyrn list creation
 	//++++++++++++++++++++++++++++++++++++++++++
 		nyrnNameParts_List = nyrnNameParts.text.Split("\n"[0]);
+
+	//++++++++++++++++++++++++++++++++++++++++++
+	//Lifindur list creation
+	//++++++++++++++++++++++++++++++++++++++++++
+		lifindurSyls_List = lifindurSyls.text.Split("\n"[0]);
 
 	//++++++++++++++++++++++++++++++++++++++++++
 	//Kanina list creation

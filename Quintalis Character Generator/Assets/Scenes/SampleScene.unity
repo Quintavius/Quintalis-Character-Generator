@@ -513,7 +513,7 @@ MonoBehaviour:
     m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 40
+    m_MinSize: 64
     m_MaxSize: 100
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -1489,6 +1489,9 @@ MonoBehaviour:
   urminnAdultVowels: {fileID: 4900000, guid: 1f5454cc38babe843891d08fe72dd37d, type: 3}
   urminnYoungNames: {fileID: 4900000, guid: 9d9871359c766f8409d37e7f40cc402e, type: 3}
   urminnYoungVowels: {fileID: 4900000, guid: b5c21fc763b0b0749a1094d89fe3a943, type: 3}
+  lifindurSyls: {fileID: 4900000, guid: 93508b7ce92f98e4c9232df5f9015850, type: 3}
+  draugurSyls: {fileID: 4900000, guid: 8dfca3125cbada94395ece729ed6bc5b, type: 3}
+  draugurEra: {fileID: 4900000, guid: b435b3da23718e74b93d1db96aebfd09, type: 3}
 --- !u!114 &1106650281
 MonoBehaviour:
   m_ObjectHideFlags: 0
