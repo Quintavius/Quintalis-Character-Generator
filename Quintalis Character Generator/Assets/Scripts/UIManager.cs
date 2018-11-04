@@ -28,6 +28,11 @@ public class UIManager : MonoBehaviour {
 		txt_ageValue.text = currentCharacter.age.ToString() + "\u000A" + "(" + Regex.Replace(currentCharacter.ageGroup.ToString(), "(\\B[A-Z])"," $1") + ")";
 		txt_YoBValue.text = ConvertRawToYear(currentCharacter.yearOfBirth) + "\u000A" + "(" + Regex.Replace(currentCharacter.era.ToString(), "(\\B[A-Z])"," $1") + ")";
 		txt_gifts.text = currentCharacter.gift.ToString();
+		if (currentCharacter.gift == CharacterClass.Gift.Esper){
+			txt_gifts.text += "\u000A" + "(" + currentCharacter.esper.ToString() + ")";
+		}else if (currentCharacter.gift == CharacterClass.Gift.Medium){
+			txt_gifts.text += "\u000A" + "(" + Regex.Replace(currentCharacter.pantheon.ToString(), "(\\B[A-Z])"," $1") + ")";
+		}
 		txt_brains.text = currentCharacter.brains.ToString();
 		txt_brawn.text = currentCharacter.brawn.ToString();
 		txt_skin.text = currentCharacter.skin.ToString();
