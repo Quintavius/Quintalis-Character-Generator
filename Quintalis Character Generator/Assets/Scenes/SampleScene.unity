@@ -512,7 +512,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 6d49cb2c62fd1074f919bffd77c19771, type: 3}
     m_FontSize: 100
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 64
     m_MaxSize: 100
     m_Alignment: 1
@@ -521,7 +521,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CharacterNamejhjhjhjhjhjhjhjhjhjkhjyjhjhjhjhjhjhjhjhjhjh jhjh jhjh
+  m_Text: Dang
 --- !u!222 &292754742
 CanvasRenderer:
   m_ObjectHideFlags: 0
