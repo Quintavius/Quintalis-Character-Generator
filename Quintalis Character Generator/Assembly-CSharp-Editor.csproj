@@ -57,6 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Skybox Shaders\Editor\GradientSkyboxInspector.cs" />
+     <Compile Include="Assets\Skybox Shaders\Editor\HorizonWithSunSkyboxInspector.cs" />
+     <Compile Include="Assets\Skybox Shaders\Editor\RgbmCubedSkyboxInspector.cs" />
      <Compile Include="Assets\VSCode\Plugins\Editor\VSCode.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Git/QuintalisCharactergen/Quintalis-Character-Generator/Quintalis Character Generator/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

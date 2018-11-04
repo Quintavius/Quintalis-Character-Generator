@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
 	public Text txt_CharacterName;
 	public Text txt_ageValue;
 	public Text txt_YoBValue;
+	public Text txt_species;
 
 	void Start () {
 		currentCharacter = GetComponent<Character>();
@@ -17,12 +18,20 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	public void UpdateUIValues () {
 		txt_CharacterName.text = currentCharacter.characterName;
-		txt_ageValue.text = currentCharacter.age.ToString() + " " + "(" + currentCharacter.ageGroup.ToString() + ")";
-		txt_YoBValue.text = currentCharacter.yearOfBirth.ToString() + " " + "(" + currentCharacter.era.ToString() + ")";
+		txt_species.text = currentCharacter.species.ToString();
+		txt_ageValue.text = currentCharacter.age.ToString() + "\u000A" + "(" + currentCharacter.ageGroup.ToString() + ")";
+		txt_YoBValue.text = ConvertRawToYear(currentCharacter.yearOfBirth) + "\u000A" + "(" + currentCharacter.era.ToString() + ")";
 	}
 
-	void ConvertRawToYear(int rawYear){
-		
+	string ConvertRawToYear(int rawYear){
+		string returnString;
+		if (rawYear > 2312){
+			int mdyear = rawYear - 2312;
+			returnString = "MD" + mdyear.ToString();
+		}else{
+			returnString = "AE" + rawYear.ToString();
+		}
+		return returnString;
 	}
 
 	void ConvertYearToRaw(){
