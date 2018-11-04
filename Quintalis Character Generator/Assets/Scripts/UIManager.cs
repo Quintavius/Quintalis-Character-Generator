@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class UIManager : MonoBehaviour {
 	Character currentCharacter;
@@ -23,9 +24,9 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	public void UpdateUIValues () {
 		txt_CharacterName.text = currentCharacter.characterName;
-		txt_species.text = currentCharacter.species.ToString();
-		txt_ageValue.text = currentCharacter.age.ToString() + "\u000A" + "(" + currentCharacter.ageGroup.ToString() + ")";
-		txt_YoBValue.text = ConvertRawToYear(currentCharacter.yearOfBirth) + "\u000A" + "(" + currentCharacter.era.ToString() + ")";
+		txt_species.text = Regex.Replace(currentCharacter.species.ToString(), "(\\B[A-Z])"," $1");
+		txt_ageValue.text = currentCharacter.age.ToString() + "\u000A" + "(" + Regex.Replace(currentCharacter.ageGroup.ToString(), "(\\B[A-Z])"," $1") + ")";
+		txt_YoBValue.text = ConvertRawToYear(currentCharacter.yearOfBirth) + "\u000A" + "(" + Regex.Replace(currentCharacter.era.ToString(), "(\\B[A-Z])"," $1") + ")";
 		txt_gifts.text = currentCharacter.gift.ToString();
 		txt_brains.text = currentCharacter.brains.ToString();
 		txt_brawn.text = currentCharacter.brawn.ToString();
