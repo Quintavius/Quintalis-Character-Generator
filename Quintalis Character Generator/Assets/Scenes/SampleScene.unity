@@ -240,14 +240,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: -56
-    m_Right: 5
+    m_Left: 0
+    m_Right: 0
     m_Top: 108
     m_Bottom: 58
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 371.41, y: 100}
+  m_CellSize: {x: 480.4, y: 100}
   m_Spacing: {x: 7.59, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 2
@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.20392157}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -584,19 +584,21 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 547706c3d57e0714185b68bf2c0c3e31, type: 3}
-    m_FontSize: 71
+    m_Font: {fileID: 12800000, guid: a2641a9c48427eb46a90c16c3053a960, type: 3}
+    m_FontSize: 65
     m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 5
-    m_MaxSize: 114
+    m_BestFit: 1
+    m_MinSize: 6
+    m_MaxSize: 65
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 78
+  m_Text: '78
+
+    (Middle Age)'
 --- !u!222 &362663992
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1290,21 +1292,21 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 547706c3d57e0714185b68bf2c0c3e31, type: 3}
-    m_FontSize: 71
+    m_Font: {fileID: 12800000, guid: a2641a9c48427eb46a90c16c3053a960, type: 3}
+    m_FontSize: 65
     m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 5
-    m_MaxSize: 114
+    m_BestFit: 1
+    m_MinSize: 6
+    m_MaxSize: 65
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '13547
+  m_Text: 'MD 9999
 
-'
+    (Age of Upheaval)'
 --- !u!222 &1668792913
 CanvasRenderer:
   m_ObjectHideFlags: 0
