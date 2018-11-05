@@ -11,19 +11,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: KANO SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -1405821606
   material: {fileID: 21538037702695802}
-  materialHashCode: 0
+  materialHashCode: -1610890095
   fontAssetType: 1
   m_fontInfo:
     Name: Kano
     PointSize: 221
-    Scale: 0
+    Scale: 1
     CharacterCount: 58
     LineHeight: 265.1875
     Baseline: 0
     Ascender: 177.9375
-    CapHeight: 0
+    CapHeight: 160.0625
     Descender: -43.125
     CenterLine: 0
     SuperscriptOffset: 177.9375
@@ -33,7 +33,7 @@ MonoBehaviour:
     UnderlineThickness: 5
     strikethrough: 49.022728
     strikethroughThickness: 5
-    TabWidth: 0
+    TabWidth: 552.5
     Padding: 5
     AtlasWidth: 1024
     AtlasHeight: 1024
@@ -42,10 +42,10 @@ MonoBehaviour:
   - id: 32
     x: 6
     y: 1029
-    width: 0
-    height: 0
+    width: 55.25
+    height: 221.0625
     xOffset: 0
-    yOffset: 0
+    yOffset: 177.9375
     xAdvance: 55.25
     scale: 1
   - id: 33
@@ -562,7 +562,20 @@ MonoBehaviour:
     xAdvance: 99.6875
     scale: 1
   m_kerningInfo:
-    kerningPairs: []
+    kerningPairs:
+    - m_FirstGlyph: 0
+      m_FirstGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      m_SecondGlyph: 0
+      m_SecondGlyphAdjustments:
+        xPlacement: 0
+        yPlacement: 0
+        xAdvance: 0
+        yAdvance: 0
+      xOffset: 0
   m_kerningPair:
     m_FirstGlyph: 0
     m_FirstGlyphAdjustments:
@@ -577,7 +590,8 @@ MonoBehaviour:
       xAdvance: 0
       yAdvance: 0
     xOffset: 0
-  fallbackFontAssets: []
+  fallbackFontAssets:
+  - {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_CreationSettings:
     sourceFontFileName: 
     sourceFontFileGUID: 6d49cb2c62fd1074f919bffd77c19771
@@ -688,9 +702,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
