@@ -28,3 +28,14 @@ smith
 free
 bolt
 screw
+light
+feather
+crow
+moon
+soft
+dust
+breath
+tower
+sing
+flute
+dream

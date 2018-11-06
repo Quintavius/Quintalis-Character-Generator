@@ -1,5 +1,5 @@
-v*ris
-*ris
+v*r$s
+*r$s
 s*lf
 fl*d
 t*rf
@@ -10,3 +10,12 @@ m*rl$
 m*nf
 *nl$
 v*n$r
+*lm$r
+m*rt
+b*rm
+l*rf
+h*l$
+sm*s$s
+c*r$s
+r*vr$
+s*m

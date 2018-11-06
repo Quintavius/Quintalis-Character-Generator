@@ -59,3 +59,11 @@ ant
 knar
 arz
 gren
+tilp
+twil
+irfsh
+lop
+stick
+ast
+hill
+unk
