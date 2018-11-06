@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour {
 	public Text txt_skin;
 	public Text txt_tongue;
 
-	void Start () {
+	void Awake () {
 		currentCharacter = GetComponent<Character>();
 	}
 	

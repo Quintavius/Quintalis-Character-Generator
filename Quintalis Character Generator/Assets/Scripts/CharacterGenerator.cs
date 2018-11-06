@@ -38,6 +38,7 @@ public class CharacterGenerator : MonoBehaviour {
 		nameManager = GetComponent<NameManager>();
 		uIManager = GetComponent<UIManager>();
 		PopulateDictionaries();
+		GenerateNewCharacter();
 	}
 
 //===========================================================================
@@ -715,5 +716,14 @@ public class CharacterGenerator : MonoBehaviour {
 
 		//Commit to class
 		speciesDefinition.Add(CharacterClass.Species.UrminnAdult, UrminnAdult);
+	}
+
+	//Dirty hack to skip options menu
+	public void GenerateNewPlayerCharacter(){
+		powerLevel = (CharacterClass.PowerLevel)1;
+		currentYear = 2312+1234;
+		GenerateNewCharacter();
+		currentYear = 0;
+		powerLevel = CharacterClass.PowerLevel.Random;
 	}
 }

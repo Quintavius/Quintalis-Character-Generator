@@ -58,7 +58,7 @@ public class NameManager : MonoBehaviour {
 
 	Character character;
 
-	void Start (){
+	void Awake (){
 		character = GetComponent<Character>();
 		InitializeNames();
 	}
