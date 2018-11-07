@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour {
 
 	public Image speciesPortrait;
 
+	public GameObject optionsCanvas;
+
 	void Awake () {
 		currentCharacter = GetComponent<Character>();
 	}
@@ -40,7 +42,7 @@ public class UIManager : MonoBehaviour {
 	public void UpdateUIValues () {
 		txt_CharacterName.text = currentCharacter.characterName;
 		txt_species.text = Regex.Replace(currentCharacter.species.ToString(), "(\\B[A-Z])"," $1");
-		
+
 		if (currentCharacter.species == CharacterClass.Species.Askadur){speciesPortrait.overrideSprite = askadurSprite;}
 		else if (currentCharacter.species == CharacterClass.Species.Draugur){speciesPortrait.overrideSprite = draugurSprite;}
 		else if (currentCharacter.species == CharacterClass.Species.Faeryn){speciesPortrait.overrideSprite = faerynSprite;}
@@ -81,5 +83,9 @@ public class UIManager : MonoBehaviour {
 
 	void ConvertYearToRaw(){
 
+	}
+
+	public void EnableOptions(){
+		optionsCanvas.SetActive(true);
 	}
 }

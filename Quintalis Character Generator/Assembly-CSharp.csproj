@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\CharacterGenerator.cs" />
      <Compile Include="Assets\Scripts\CoreValues.cs" />
      <Compile Include="Assets\Scripts\NameManager.cs" />
+     <Compile Include="Assets\Scripts\OptionsManager.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
      <Compile Include="Assets\Scripts\WorldCreation.cs" />
      <None Include="Assets\Resources\Kanina_simpleNames.txt" />
