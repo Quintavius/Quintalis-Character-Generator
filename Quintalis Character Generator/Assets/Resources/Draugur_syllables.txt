@@ -47,3 +47,5 @@ krul
 svan
 ru
 vut
+thorst
+mund

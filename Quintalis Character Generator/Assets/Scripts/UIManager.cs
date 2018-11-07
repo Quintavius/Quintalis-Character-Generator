@@ -17,6 +17,21 @@ public class UIManager : MonoBehaviour {
 	public Text txt_skin;
 	public Text txt_tongue;
 
+	public Sprite madurSprite;
+	public Sprite askadurSprite;
+	public Sprite draugurSprite;
+	public Sprite faerynSprite;
+	public Sprite kaninaSprite;
+	public Sprite lifindurSprite;
+	public Sprite nyrnSprite;
+	public Sprite skjomadurSprite;
+	public Sprite trollSprite;
+	public Sprite urminnAdultSprite;
+	public Sprite urminnYoungSprite;
+	public Sprite vidurSprite;
+
+	public Image speciesPortrait;
+
 	void Awake () {
 		currentCharacter = GetComponent<Character>();
 	}
@@ -25,6 +40,20 @@ public class UIManager : MonoBehaviour {
 	public void UpdateUIValues () {
 		txt_CharacterName.text = currentCharacter.characterName;
 		txt_species.text = Regex.Replace(currentCharacter.species.ToString(), "(\\B[A-Z])"," $1");
+		
+		if (currentCharacter.species == CharacterClass.Species.Askadur){speciesPortrait.overrideSprite = askadurSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.Draugur){speciesPortrait.overrideSprite = draugurSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.Faeryn){speciesPortrait.overrideSprite = faerynSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.Kanina){speciesPortrait.overrideSprite = kaninaSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.Lifindur){speciesPortrait.overrideSprite = lifindurSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.Madur){speciesPortrait.overrideSprite = madurSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.Nyrn){speciesPortrait.overrideSprite = nyrnSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.Skjomadur){speciesPortrait.overrideSprite = skjomadurSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.Troll){speciesPortrait.overrideSprite = trollSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.UrminnAdult){speciesPortrait.overrideSprite = urminnAdultSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.UrminnYoung){speciesPortrait.overrideSprite = urminnYoungSprite;}
+		else if (currentCharacter.species == CharacterClass.Species.Vidur){speciesPortrait.overrideSprite = vidurSprite;}
+
 		txt_ageValue.text = currentCharacter.age.ToString() + "\u000A" + "(" + Regex.Replace(currentCharacter.ageGroup.ToString(), "(\\B[A-Z])"," $1") + ")";
 		txt_YoBValue.text = ConvertRawToYear(currentCharacter.yearOfBirth) + "\u000A" + "(" + Regex.Replace(currentCharacter.era.ToString(), "(\\B[A-Z])"," $1") + ")";
 		txt_gifts.text = currentCharacter.gift.ToString();
