@@ -38,3 +38,5 @@ ivlin
 lint
 is
 axis
+hul
+oma

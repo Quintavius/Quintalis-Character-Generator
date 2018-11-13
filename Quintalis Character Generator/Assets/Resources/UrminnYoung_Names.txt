@@ -19,3 +19,6 @@ sm*s$s
 c*r$s
 r*vr$
 s*m
+l*do
+h*dr$s
+h*der$
